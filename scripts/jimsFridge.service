@@ -1,0 +1,19 @@
+[Unit]
+Description=Jims Fridge
+After=syslog.target network.target remote-fs.target nss-lookup.target mysql.service mosquitto.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+TimeoutStartSec=10
+TimeoutStopSec=10
+StartLimitBurst=5
+StartLimitInterval=60s
+WorkingDirectory=/tmp
+SyslogIdentifier=jimsfridge-service
+ExecStart=/usr/local/bin/jimsFridge
+
+[Install]
+WantedBy=default.target
+RequiredBy=network.target
